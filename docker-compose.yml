@@ -1,0 +1,46 @@
+version: '3.1'
+services:
+    wp:
+        build: ./wp
+        environment:
+            WORDPRESS_DB_CHARSET: utf8
+            WORDPRESS_DEBUG: false
+            WORDPRESS_CONFIG_EXTRA: |
+                    /* SQLite Configuration */
+                    define('FS_METHOD', 'direct' );
+                    define('DB_FILE', 'db.db');
+                    define('DB_DIR', '/var/www/db/');
+                    define('DOMAIN_CURRENT_SITE', 'localhost'); // this can be changed in the admin portal too
+                    define('DISALLOW_FILE_EDIT', true);
+        volumes:
+            - db:/var/www/db
+            - html:/var/www/html
+        restart: always
+        networks:
+            agent:
+                ipv4_address: 172.25.1.100
+            default:
+    http:
+        build: ./nginx
+        links:
+            - wp:wordpress
+        volumes_from:
+            - wp
+        ports:
+            - "8080:80"
+        restart: always
+        networks:
+            agent:
+                ipv4_address: 172.25.1.101
+            default:
+
+networks:
+    agent:
+        driver: bridge
+        ipam:
+            config:
+            - subnet: 172.25.1.0/24
+            
+volumes:
+    db:
+    html:
