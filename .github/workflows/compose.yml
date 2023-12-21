@@ -1,0 +1,12 @@
+name: Docker Compose Actions Workflow
+
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: build and run the project
+        run: docker-compose up -d
+      - name: Test that the Wordpress is correctly installed and running
+        run: curl -s --retry 10 --retry-connrefused http://localhost:8080/
