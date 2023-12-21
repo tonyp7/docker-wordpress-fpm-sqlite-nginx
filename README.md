@@ -1,6 +1,6 @@
 ![CI Workflow](https://github.com/tonyp7/docker-wordpress-fpm-sqlite-nginx/actions/workflows/compose.yml/badge.svg)
 
-# docker-wordpress-fpm-sqlite-nginx
+# Wordpress Site with SQLite, Nginx and PHP-FPM on Docker
 
 This repository features a docker-compose.yml that allows running very easily a Wordpress website running on php-fpm, Nginx and SQLite.
 
