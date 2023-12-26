@@ -2,6 +2,7 @@ version: '3.1'
 services:
     wp:
         container_name: wordpress
+        image: tonyp7/wordpress-fpm-sqlite-alpine
         build: ./wp
         environment:
             WORDPRESS_DB_CHARSET: utf8
@@ -23,6 +24,7 @@ services:
             default:
     http:
         container_name: nginx
+        image: tonyp7/nginx-alpine-wordpress
         depends_on:
             - wp
         build: ./nginx
