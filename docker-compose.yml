@@ -23,6 +23,8 @@ services:
             default:
     http:
         container_name: nginx
+        depends_on:
+            - wp
         build: ./nginx
         links:
             - wp:wordpress
