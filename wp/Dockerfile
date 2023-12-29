@@ -4,6 +4,10 @@ FROM wordpress:fpm-alpine
 # This increases the limit to a more acceptable default
 COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 
+# Security hardening. Most defaults are already sensible 
+# and do not need to change
+COPY hardening.ini /usr/local/etc/php/conf.d/hardening.ini
+
 # Install curl and unzip
 RUN apk add --update curl unzip && rm -Rf /var/cache/apk/*
 
