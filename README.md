@@ -28,10 +28,16 @@ The Wordpress image is based on `wordpress:fpm-alpine` which itself is based off
 The image will pull the latest version of the official SQlite plugin for Wordpress and install it.
 The docker compose will in addition setup the `wp-config.php` file so that it can run properly with SQLite.
 
+### Additional PHP configuration
+
+The PHP default configuration include sensible values, but some are not well-suited to running a Wordpress site. For this reason, the Docker image contains additional PHP configuration in `uploads.ini` and `hardening.ini`. 
+The first file increase the file upload max size to 10M (default: 2M) while hardening includes additional security settings.
+
 ## Nginx image
 
 The Nginx image is based off the `nginx:stable-alpine` official image. 
 It contains a sensible configuration file that hardens and make nginx wordpress friendly. Notably the configuration files:
+ - Increases file upload max size to 10M
  - Caches static files
  - Imposes a rate limit on wp-login.php
  - Disable external access to xmlrpc.php
