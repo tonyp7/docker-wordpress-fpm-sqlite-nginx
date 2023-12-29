@@ -1,7 +1,8 @@
 FROM wordpress:fpm-alpine
 
-# Set Process Manager to "ondemand"
-# RUN sed -i 's/pm = dynamic/pm = ondemand/g' /usr/local/etc/php-fpm.d/www.conf
+# php.ini default size is 2M which is a bit small for blogs
+# This increases the limit to a more acceptable default
+COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 
 # Install curl and unzip
 RUN apk add --update curl unzip && rm -Rf /var/cache/apk/*
